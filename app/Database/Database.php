@@ -28,7 +28,7 @@
             try {
                 $this->conn = new PDO($dns, $this->username, $this->password);
                 $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-                echo "connected to database!";
+                // echo "connected to database!";
             } catch (PDOException $e) {
                 echo "Connection failed!" . $e->getMessage();
             }
@@ -39,5 +39,3 @@
         }
     }
 
-    $o = new Database;
-    $o->getConn();
