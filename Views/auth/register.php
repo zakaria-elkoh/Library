@@ -40,7 +40,7 @@
     </nav>
 
     <div class="max-w-md mx-auto mt-32 p-6 py-12 border rounded-xl">
-        <h1 class="text-white text-2xl mb-8 text-center">Register:</h1>
+        <h1 class="text-white text-3xl mb-10 text-center">Register:</h1>
         <form class="" action="../../app/Controller/auth/RegistrationController.php" method="post">
             <div class="grid md:grid-cols-2 md:gap-6">
                 <div class="relative z-0 w-full mb-5 group">

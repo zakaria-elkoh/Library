@@ -39,7 +39,7 @@
 
     <div class="max-w-md mx-auto mt-32 p-6 py-12 border rounded-xl">
         
-        <h1 class="text-white text-2xl mb-8 text-center">Log In:</h1>
+        <h1 class="text-white text-3xl mb-10 text-center">Log In:</h1>
         <p class="text-red-600 mb-4 text-center"><?php if(isset($_GET['msg'])) echo $_GET['msg']; ?></p>
         <form class="" action="../../app/Controller/auth/LoginController.php" method="post">
             <div class="relative z-0 w-full mb-5 group">

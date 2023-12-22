@@ -1,6 +1,8 @@
 <?php
 
-    require_once '../../Database/Database.php';
+    // namespace App\Models;
+    // require_once '../../Database/Database.php';
+
 
 class User 
 {
@@ -58,8 +60,18 @@ class User
         }
 
     }
+
+    public function getUsers() {
+        $sql = "SELECT * FROM user";
+        $stmt = $this->Database->getConn()->prepare($sql);
+        $stmt->execute();
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $users;
+    }
+
 }
 
 // $o = new User();
-// $succ = $o->create("zakaria", "elkoh", "za@gmail.com", "068263746", "1234");
+// $succ = $o->getUsers();
 // var_dump($succ);

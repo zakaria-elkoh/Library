@@ -1,9 +1,11 @@
 <?php
+
+
     // namespace App\controller\auth;
     session_start();
 
-    require_once '../../Database/Database.php';
     require_once '../../models/User.php';
+    require_once '../../Database/Database.php';
 
     class LoginController 
     {
@@ -33,23 +35,20 @@
                 
                 $_SESSION['user_id'] = $user_id;
                 $_SESSION['user_role_id'] = $user_role_arr["role_id"];
+
                 
                 if($_SESSION['user_role_id'] == 1) {
                     echo "hello admin from the log in controller";
+                    header("location: ../../../index.php");
                 } else {
                     echo "hello user from the log in controller";
-                    // header("location: ../../../index.php");
+                    header("location: ../../../index.php");
                 }
 
 
             }
         }
     }
-
-    // $o = new LoginController();
-
-    // var_dump($o->conn->getConn());
-
 
 
     // add a user
