@@ -21,6 +21,16 @@
             return $success;
         }
 
+        public function getReservations() {
+
+            $sql = "SELECT * FROM resevation";  
+            $stmt = $this->Database->getConn()->prepare($sql); 
+            $stmt->execute();
+            $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $reservations;
+        }
+
         public function deleteReservation($user_id, $book_id) {
 
             $sql = "DELETE FROM resevation WHERE user_id = ? AND book_id = ? LIMIT 1";  

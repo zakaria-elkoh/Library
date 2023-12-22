@@ -1,10 +1,10 @@
 <?php
 
     require_once "../../app/Database/Database.php";
-    require_once "../../app/Models/User.php";
+    require_once "../../app/Models/Reservation.php";
 
-    $user = new User();
-    $users = $user->getUsers();
+    $reservation = new Reservation();
+    $reservations = $reservation->getReservations();
 
 ?>
 
@@ -40,7 +40,7 @@
                     <span class="ms-3">Dashboard</span>
                     </a>
                 </li>
-                <li class="bg-gray-700 rounded-lg">
+                <li>
                     <a href="users.php" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                             <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
@@ -57,8 +57,8 @@
                     <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
                     </a>
                 </li>
-                <li>
-                    <a href="reservations.php" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <li class="bg-gray-700 rounded-lg">
+                    <a href="reservations.php"  class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                         <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"/>
                     </svg>
@@ -97,115 +97,65 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                First Name
+                                Reservation Id
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Last Name
+                                User Id
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Email
+                                Book Id
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Phone
+                                Description
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Action
+                                Reservation Date
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Return Date
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Is Returned
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Actions
                             </th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        <?php foreach($users as $user) : ?>
+                        <?php foreach($reservations as $reservation) : ?>
 
                             <tr class="odd:bg-white text-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                                 <th class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                    <?= $user['first_name'] ?>
+                                    <?= $reservation['id'] ?>
                                 </th>
                                 <td class="px-6 py-4">
-                                    <?= $user['last_name'] ?>
+                                    <?= $reservation['user_id'] ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?= $user['email'] ?>
+                                    <?= $reservation['book_id'] ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?= $user['phone'] ?>
+                                    <?= $reservation['description'] ?>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <?= $reservation['reservation_date'] ?>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <?= $reservation['return_date'] ?>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <?= $reservation['is_returned'] ?>
                                 </td>
                                 <td class="px-6 py-4">
                                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    <a href="#" class="font-medium ml-4 text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+                                    <a href="./reservations/delete.php?id=" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
                                 </td>
                             </tr>
 
                         <?php endforeach ?>
 
-                        <!-- <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Microsoft Surface Pro
-                            </th>
-                            <td class="px-6 py-4">
-                                White
-                            </td>
-                            <td class="px-6 py-4">
-                                Laptop PC
-                            </td>
-                            <td class="px-6 py-4">
-                                $1999
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
-                        </tr>
-                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Magic Mouse 2
-                            </th>
-                            <td class="px-6 py-4">
-                                Black
-                            </td>
-                            <td class="px-6 py-4">
-                                Accessories
-                            </td>
-                            <td class="px-6 py-4">
-                                $99
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
-                        </tr>
-                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Google Pixel Phone
-                            </th>
-                            <td class="px-6 py-4">
-                                Gray
-                            </td>
-                            <td class="px-6 py-4">
-                                Phone
-                            </td>
-                            <td class="px-6 py-4">
-                                $799
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                Apple Watch 5
-                            </th>
-                            <td class="px-6 py-4">
-                                Red
-                            </td>
-                            <td class="px-6 py-4">
-                                Wearables
-                            </td>
-                            <td class="px-6 py-4">
-                                $999
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
-                        </tr> -->
                     </tbody>
                 </table>
 

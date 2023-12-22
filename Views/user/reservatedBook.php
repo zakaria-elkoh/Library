@@ -5,8 +5,11 @@
     require_once "../../app/Database/Database.php";
     require_once "../../app/Models/Book.php";
 
+    $user_id = $_SESSION['user_id'];
+
     $book = new Book();
-    $books = $book->getReservatedBooks(19);
+    $books = $book->getReservatedBooks($user_id);
+
  
 ?>
 
